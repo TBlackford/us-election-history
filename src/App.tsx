@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import React, { useEffect } from 'react'
+import { Router, RouteComponentProps, Link } from "@reach/router"
+
 import './App.css';
 
-const App = () => (
-    <div className="App">
-        <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo"/>
-            <p>
-                Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Learn React
-            </a>
-        </header>
-    </div>
-);
+let Home = (props: RouteComponentProps) => <div>Home</div>
+let Dash = (props: RouteComponentProps) => <div>Dash</div>
+
+
+const App: React.FunctionComponent = (props) => {
+    return (
+        <div className="main-content">
+            <Router>
+                <Home path="/" />
+                <Dash path="dashboard" />
+            </Router>
+        </div>
+    );
+};
+
 
 export default App;
