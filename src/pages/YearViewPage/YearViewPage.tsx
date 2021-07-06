@@ -1,7 +1,9 @@
 import React, {PropsWithChildren, useEffect} from 'react';
-import 'YearViewPage.css'
+import {RouteComponentProps} from "@reach/router";
 
-const YearViewPage: React.FunctionComponent = (props: PropsWithChildren<{}>) => {
+import './YearViewPage.css'
+
+let YearViewPage: React.FunctionComponent = (props: RouteComponentProps) => {
     return (
         <p>Change me</p>
     );

@@ -1,7 +1,9 @@
 import React, {PropsWithChildren, useEffect} from 'react';
-import 'HomePage.css'
+import {RouteComponentProps} from "@reach/router";
 
-const HomePage: React.FunctionComponent = (props: PropsWithChildren<{}>) => {
+import './HomePage.css'
+
+const HomePage: React.FunctionComponent = (props: RouteComponentProps) => {
     return (
         <p>Change me</p>
     );

@@ -1,18 +1,23 @@
-import React, { useEffect } from 'react'
+import React, {FunctionComponent, useEffect} from 'react'
 import { Router, RouteComponentProps, Link } from "@reach/router"
+
+import HomePage from "./pages/HomePage";
+import YearViewPage from "./pages/YearViewPage";
 
 import './App.css';
 
-let Home = (props: RouteComponentProps) => <div>Home</div>
-let Dash = (props: RouteComponentProps) => <div>Dash</div>
+type Props = { component: FunctionComponent } & RouteComponentProps;
 
+const Route: FunctionComponent<Props> = ({ component: Component, ...rest }) => (
+    <Component {...rest} />
+);
 
 const App: React.FunctionComponent = (props) => {
     return (
         <div className="container">
             <Router>
-                <Home path="/" />
-                <Dash path="dashboard" />
+                <Route path="/" component={HomePage} />
+                <Route path="/" component={YearViewPage} />
             </Router>
         </div>
     );
