@@ -9,7 +9,7 @@ let Dash = (props: RouteComponentProps) => <div>Dash</div>
 
 const App: React.FunctionComponent = (props) => {
     return (
-        <div className="main-content">
+        <div className="container">
             <Router>
                 <Home path="/" />
                 <Dash path="dashboard" />
