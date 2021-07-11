@@ -1,27 +1,40 @@
-import React, {FunctionComponent, useEffect} from 'react'
-import { Router, RouteComponentProps, Link } from "@reach/router"
+import React from 'react';
+import { Route, Switch, RouteProps, RouteComponentProps, withRouter } from 'react-router-dom';
 
 import HomePage from "./pages/HomePage";
 import YearViewPage from "./pages/YearViewPage";
 
 import './App.css';
 
-type Props = { component: FunctionComponent } & RouteComponentProps;
+interface RenderProps extends RouteProps {
+    /* other props for ChildComponent */
+}
+interface HistoryProps extends RouteComponentProps {
 
-const Route: FunctionComponent<Props> = ({ component: Component, ...rest }) => (
-    <Component {...rest} />
-);
+}
 
-const App: React.FunctionComponent = (props) => {
-    return (
-        <div className="container">
-            <Router>
-                <Route path="/" component={HomePage} />
-                <Route path="/" component={YearViewPage} />
-            </Router>
-        </div>
-    );
-};
+const NoMatch = () => (
+    <div>
+        Page Not Found
+    </div>
+)
 
+class App extends React.Component<RenderProps & HistoryProps> {
+    render() {
+        return (
+            <div className="main-content">
+                <div>
+                    <Switch>
+                        <Route path="/:year" component={YearViewPage}/>
+                        <Route exact path="/" component={HomePage}/>
+                        <Route path="*">
+                            <NoMatch/>
+                        </Route>
+                    </Switch>
+                </div>
+            </div>
+        );
+    }
+}
 
-export default App;
+export default withRouter(App);
