@@ -41,7 +41,7 @@ const Map: React.FunctionComponent = () => {
     }
 
     return (
-        <svg width={800} height={450} viewBox={`0 0 ${width} ${height}`}>
+        <svg width={800} height={450} viewBox={`0 0 ${width} ${height}`} className="m-auto">
             <g className="countries">
                 {
                     geojson.features.map((d: GeoPermissibleObjects, i: any) => (
