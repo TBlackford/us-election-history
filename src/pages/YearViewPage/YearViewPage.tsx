@@ -1,10 +1,14 @@
 import React, { PropsWithChildren } from 'react';
 
 import './YearViewPage.css'
+import Map from "../../components/Map";
 
 let YearViewPage: React.FunctionComponent = (props: PropsWithChildren<{}>) => {
     return (
-        <p>Change me</p>
+        <div>
+            <p>Change me</p>
+            <Map />
+        </div>
     );
 }
 

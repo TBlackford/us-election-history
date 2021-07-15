@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import YearViewPage from "./pages/YearViewPage";
 
 import './App.css';
+import Navbar from "./components/Navbar";
 
 interface RenderProps extends RouteProps {
     /* other props for ChildComponent */

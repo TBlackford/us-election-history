@@ -32,7 +32,7 @@ const features = [
 ]
 
 const years = Array(59).fill({
-    year: '1912',
+    year: 1788,
     image: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/ElectoralCollege1912.svg',
 });
 
@@ -45,17 +45,17 @@ const HomePage: React.FunctionComponent = (props: RouteComponentProps) => {
                         US Presidential Election History
                     </p>
                     <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                        1789-2020
+                        1788-2020
                     </p>
                 </div>
 
                 <div className="mt-10">
                     <dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10">
-                        {years.map((year) => (
-                            <div key={year.year} className="relative">
+                        {years.map((year, index) => (
+                            <div key={year.year + (index * 4)} className="relative">
                                 <img src={year.image} />
                                 <dt>
-                                    <p className="ml-16 text-lg leading-6 font-medium text-gray-900">{year.year}</p>
+                                    <p className="ml-16 text-lg leading-6 font-medium text-gray-900">{year.year + (index * 4)}</p>
                                 </dt>
                             </div>
                         ))}
