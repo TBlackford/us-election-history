@@ -1,14 +1,14 @@
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
+import Map from '@components/Map';
+import ResultsHeader from '@components/ResultsHeader';
 
 import './YearViewPage.css'
-import Map from "../../components/Map";
-import ResultsHeader from "../../components/ResultsHeader";
 
-let YearViewPage: React.FunctionComponent = (props: PropsWithChildren<{}>) => {
+let YearViewPage: React.FunctionComponent = () => {
     return (
         <div>
-            <ResultsHeader />
-            <Map />
+            <ResultsHeader/>
+            <Map/>
         </div>
     );
 }
