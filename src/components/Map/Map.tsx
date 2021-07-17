@@ -1,5 +1,5 @@
-import React, {Component, PropsWithChildren, useEffect, useState} from 'react';
-import {geoAlbersUsa, geoMercator, geoPath, GeoPermissibleObjects} from 'd3-geo';
+import React, { useEffect, useState } from 'react';
+import { geoAlbersUsa, geoPath, GeoPermissibleObjects } from 'd3-geo';
 import axios from 'axios';
 import './Map.css'
 
@@ -8,7 +8,7 @@ const height = 450;
 
 const projection = geoAlbersUsa()
     .scale(950)
-    .translate([width/2, height/2]);
+    .translate([width / 2, height / 2]);
 
 interface IGeoJsonObject {
     features: [],
@@ -24,7 +24,7 @@ const Map: React.FunctionComponent = () => {
 
     // Get the data from the git repo (cheeky way to do an api I don't have to pay for or maintain)
     useEffect(() => {
-        axios.get('https://raw.githubusercontent.com/TBlackford/us-history-maps/master/GeoJSON/1789030.geojson')
+        axios.get('https://raw.githubusercontent.com/TBlackford/us-history-maps/master/GeoJSON/1805070.geojson')
             .then(res => {
                 console.log(res.data);
                 setGeojson(res.data);

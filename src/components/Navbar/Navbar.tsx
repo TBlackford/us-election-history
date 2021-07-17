@@ -1,4 +1,4 @@
-import React, {PropsWithChildren, useEffect} from 'react';
+import React, { PropsWithChildren } from 'react';
 import './Navbar.css'
 
 const Navbar: React.FunctionComponent = (props: PropsWithChildren<{}>) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {RouteComponentProps} from "@reach/router";
+import { RouteComponentProps } from "@reach/router";
 import { AnnotationIcon, GlobeAltIcon, LightningBoltIcon, ScaleIcon } from '@heroicons/react/outline';
 
 import './HomePage.css';
@@ -53,7 +53,7 @@ const HomePage: React.FunctionComponent = (props: RouteComponentProps) => {
                     <dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10">
                         {years.map((year, index) => (
                             <div key={year.year + (index * 4)} className="relative">
-                                <img src={year.image} />
+                                <img src={year.image}/>
                                 <dt>
                                     <p className="ml-16 text-lg leading-6 font-medium text-gray-900">{year.year + (index * 4)}</p>
                                 </dt>

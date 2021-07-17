@@ -1,17 +1,15 @@
 import React from 'react';
-import { Route, Switch, RouteProps, RouteComponentProps, withRouter } from 'react-router-dom';
+import { Route, RouteComponentProps, RouteProps, Switch, withRouter } from 'react-router-dom';
 
-import HomePage from "./pages/HomePage";
-import YearViewPage from "./pages/YearViewPage";
+import HomePage from "../pages/HomePage";
+import YearViewPage from "../pages/YearViewPage";
 
 import './App.css';
-import Navbar from "./components/Navbar";
 
 interface RenderProps extends RouteProps {
-    /* other props for ChildComponent */
 }
-interface HistoryProps extends RouteComponentProps {
 
+interface HistoryProps extends RouteComponentProps {
 }
 
 const NoMatch = () => (
