@@ -9,6 +9,7 @@ custom:
     pythonBin: python3
   wsgi:
     app: app.app
+    packRequirements: false
 
 provider:
   name: aws

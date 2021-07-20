@@ -14,6 +14,14 @@ const post = (route: string, config: AxiosRequestConfig) => {
 }
 
 export default async function client(method: 'GET' | 'POST', route: string, config: AxiosRequestConfig = {}): Promise<AxiosResponse> {
+    config = Object.assign(config, {
+        headers: {
+            "Access-Control-Allow-Headers" : "Content-Type",
+            "Access-Control-Allow-Origin": "http://localhost:3000",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
+    });
+
     switch (method) {
         case 'GET':
             return await get(API_URL + route, config);

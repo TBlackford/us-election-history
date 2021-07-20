@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useState } from 'react';
 import { geoAlbersUsa, geoPath, GeoPermissibleObjects } from 'd3-geo';
-import axios from 'axios';
+
+import cartographer from "@common/cartographer.api";
 import './Map.css'
 
 const width = 800;
@@ -15,7 +16,12 @@ interface IGeoJsonObject {
     type: string,
 }
 
-const Map: React.FunctionComponent = () => {
+interface MapParams {
+    year: string;
+}
+
+
+const Map: React.FunctionComponent<MapParams> = (props: PropsWithChildren<MapParams>) => {
     // Map data to be displayed
     const [geojson, setGeojson] = useState<IGeoJsonObject>({
         features: [],
@@ -24,12 +30,12 @@ const Map: React.FunctionComponent = () => {
 
     // Get the data from the git repo (cheeky way to do an api I don't have to pay for or maintain)
     useEffect(() => {
-        axios.get('https://raw.githubusercontent.com/TBlackford/us-history-maps/master/GeoJSON/1805070.geojson')
+        cartographer('GET', props.year.toString(), {})
             .then(res => {
                 console.log(res.data);
                 setGeojson(res.data);
             })
-    }, []);
+    }, [props.year]);
 
     const handleCountryClick = (countryIndex: number) => {
         // TODO: flesh this out
