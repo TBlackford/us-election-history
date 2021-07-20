@@ -1,5 +1,4 @@
 from flask import Flask, jsonify, make_response
-import requests
 
 app = Flask(__name__)
 
@@ -69,14 +68,7 @@ maps = {
 
 @app.route("/<year:int>")
 def hello_from_root(year):
-    url = maps[year]
-
-    try:
-        res = requests.get(url)
-    except requests.ConnectionError:
-        return make_response(jsonify(error='Cannot find map'), 404)
-
-    return make_response(jsonify(res), 404)
+    return make_response(jsonify(maps[year]), 200)
 
 
 @app.errorhandler(404)
