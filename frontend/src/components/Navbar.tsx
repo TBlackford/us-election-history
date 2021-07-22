@@ -1,5 +1,4 @@
 import React, { PropsWithChildren } from 'react';
-import './Navbar.css'
 
 const Navbar: React.FunctionComponent = (props: PropsWithChildren<{}>) => {
     return (

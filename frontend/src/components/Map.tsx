@@ -2,7 +2,6 @@ import React, { PropsWithChildren, useEffect, useState } from 'react';
 import { geoAlbersUsa, geoPath, GeoPermissibleObjects } from 'd3-geo';
 
 import cartographer from "@common/cartographer.api";
-import './Map.css'
 
 const width = 800;
 const height = 450;

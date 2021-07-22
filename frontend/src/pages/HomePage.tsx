@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './HomePage.css';
-
 const years = Array(59).fill({
     year: 1788,
     image: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/ElectoralCollege1912.svg',
