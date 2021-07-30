@@ -32,7 +32,7 @@ const Map: React.FunctionComponent<MapParams> = (props: PropsWithChildren<MapPar
         cartographer('GET', props.year.toString(), {})
             .then(res => {
                 console.log(res.data);
-                setGeojson(res.data);
+                setGeojson(res.data.map);
             })
     }, [props.year]);
 

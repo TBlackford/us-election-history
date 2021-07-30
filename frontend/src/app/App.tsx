@@ -24,8 +24,8 @@ class App extends React.Component<RenderProps & HistoryProps> {
             <div className="main-content">
                 <div>
                     <Switch>
-                        <Route path="/:year" component={YearViewPage}/>
                         <Route exact path="/" component={HomePage}/>
+                        <Route exact path="/:year/" component={YearViewPage}/>
                         <Route path="*">
                             <NoMatch/>
                         </Route>
