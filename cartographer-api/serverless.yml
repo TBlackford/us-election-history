@@ -4,12 +4,6 @@ service: cartographer-api
 
 frameworkVersion: '2'
 
-custom:
-  pythonRequirements:
-    pythonBin: python3
-  wsgi:
-    app: app.app
-    packRequirements: false
 
 provider:
   name: aws
@@ -17,16 +11,19 @@ provider:
   lambdaHashingVersion: '20201221'
 
 functions:
-  api:
-    handler: wsgi_handler.handler
+  hello:
+    handler: handler.hello
     events:
       - http:
           path: /
-          method: ANY
+          method: get
+  map:
+    handler: handler.get_map
+    events:
       - http:
-          path: /{proxy+}
-          method: ANY
-
-plugins:
-  - serverless-wsgi
-  - serverless-python-requirements
+          path: map/{year}
+          method: get
+          request:
+            parameters:
+              paths:
+                year: true

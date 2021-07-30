@@ -1,10 +1,6 @@
-from flask import Flask, jsonify, make_response
+import json
 
-app = Flask(__name__)
-
-# Cheekily, I just return a dict to a GitHub repo.
-# This is intended to change to a proper S3 bucket later.
-maps = {
+map_list = {
     '1788': 'https://raw.githubusercontent.com/TBlackford/us-history-maps/master/GeoJSON/1789030.geojson',
     '1792': 'https://raw.githubusercontent.com/TBlackford/us-history-maps/master/GeoJSON/1792060.geojson',
     '1796': 'https://raw.githubusercontent.com/TBlackford/us-history-maps/master/GeoJSON/1796060.geojson',
@@ -66,11 +62,43 @@ maps = {
     '2020': 'https://raw.githubusercontent.com/TBlackford/us-history-maps/master/GeoJSON/1959080.geojson',
 }
 
-@app.route("/<year:int>")
-def hello_from_root(year):
-    return make_response(jsonify(maps[year]), 200)
+def make_response(status, body = {}):
+    return {
+        "statusCode": status,
+        "body": json.dumps(body)
+    }
 
+def hello(event, context):
+    body = {
+        "message": "Go Serverless v2.0! Your function executed successfully!",
+        "input": event,
+    }
 
-@app.errorhandler(404)
-def resource_not_found(e):
-    return make_response(jsonify(error='Not found!'), 404)
+    response = {"statusCode": 200, "body": json.dumps(body)}
+
+    return response
+
+    # Use this code if you don't use the http event with the LAMBDA-PROXY
+    # integration
+    """
+    return {
+        "message": "Go Serverless v1.0! Your function executed successfully!",
+        "event": event
+    }
+    """
+
+def get_map(event, context):
+    map_path = event['pathParameters']['year']
+    if map_path is not None:
+        if map_path in map_list:
+            return make_response(200, {
+                "map": map_list[map_path]
+            })
+        else:
+            return make_response(404, {
+                "msg": "Year does not exist"
+            })
+    else:
+        return make_response(500, {
+                "msg": "Enter a year"
+            })
