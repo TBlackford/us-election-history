@@ -78,7 +78,7 @@ def make_response(status, body = {}):
     }
 
 def from_bucket(key):
-    bucket = s3.get_object(Bucket='us-history-maps', Key='GeoJSON/1789030.geojson')
+    bucket = s3.get_object(Bucket='us-history-maps', Key=key)
     return json.loads(bucket['Body'].read().decode("utf-8"))
 
 def hello(event, context):
@@ -104,6 +104,8 @@ def get_map(event, context):
     map_path = event['pathParameters']['year']
     if map_path is not None:
         if map_path in map_list:
+            print(map_path)
+            print(map_list[map_path])
             return make_response(200, {
                 "map": from_bucket(map_list[map_path])
             })
