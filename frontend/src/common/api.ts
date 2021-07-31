@@ -15,11 +15,7 @@ const post = (route: string, config: AxiosRequestConfig) => {
 
 export default async function client(method: 'GET' | 'POST', route: string, config: AxiosRequestConfig = {}): Promise<AxiosResponse> {
     config = Object.assign(config, {
-        headers: {
-            "Access-Control-Allow-Headers" : "Content-Type",
-            "Access-Control-Allow-Origin": "http://localhost:3000",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-        },
+        // Add in any necessary headers
     });
 
     switch (method) {

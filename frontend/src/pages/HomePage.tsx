@@ -2,7 +2,8 @@ import React from 'react';
 
 const years = Array(59).fill({
     year: 1788,
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/ElectoralCollege1912.svg',
+    // image: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/ElectoralCollege1912.svg',
+    image: 'https://en.wikipedia.org/wiki/File:ElectoralCollege1916.svg'
 });
 
 const HomePage: React.FunctionComponent = () => {

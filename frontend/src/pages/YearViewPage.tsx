@@ -1,9 +1,7 @@
 import React from 'react';
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import Map from '@components/Map';
 import ResultsHeader from '@components/ResultsHeader';
-
-import './YearViewPage.css'
 
 let YearViewPage: (props: RouteComponentProps) => JSX.Element = (props) => {
     // @ts-ignore
@@ -16,4 +14,5 @@ let YearViewPage: (props: RouteComponentProps) => JSX.Element = (props) => {
     );
 }
 
-export default YearViewPage;
+export default withRouter(YearViewPage);
+

@@ -23,7 +23,24 @@ functions:
       - http:
           path: map/{year}
           method: get
+          cors:
+            origin: '*' # <-- Specify allowed origin
+            headers: # <-- Specify allowed headers
+              - Content-Type
+              - X-Amz-Date
+              - Accept
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
           request:
             parameters:
               paths:
                 year: true
+  buckets:
+    handler: handler.buckets
+    events:
+      - http:
+          path: /buckets
+          method: get

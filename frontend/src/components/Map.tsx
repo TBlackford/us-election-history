@@ -34,6 +34,14 @@ const Map: React.FunctionComponent<MapParams> = (props: PropsWithChildren<MapPar
                 console.log(res.data);
                 setGeojson(res.data.map);
             })
+            .catch(error => {
+                console.log("oops");
+                if(error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                }
+            })
     }, [props.year]);
 
     const handleCountryClick = (countryIndex: number) => {
