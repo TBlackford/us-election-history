@@ -2,6 +2,7 @@ import React, { PropsWithChildren, useEffect, useState } from 'react';
 import { geoAlbersUsa, geoPath, GeoPermissibleObjects } from 'd3-geo';
 
 import cartographer from "@common/cartographer.api";
+import LoadingBar from "@components/LoadingBar";
 
 const width = 800;
 const height = 450;
@@ -26,12 +27,16 @@ const Map: React.FunctionComponent<MapParams> = (props: PropsWithChildren<MapPar
         features: [],
         type: ""
     });
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     // Get the data from the git repo (cheeky way to do an api I don't have to pay for or maintain)
     useEffect(() => {
         cartographer('GET', props.year.toString(), {})
             .then(res => {
+                console.log("before set");
                 setGeojson(res.data.map);
+                setIsLoading(false);
+                console.log("after set");
             })
             .catch(error => {
                 if(error.response) {
@@ -52,6 +57,8 @@ const Map: React.FunctionComponent<MapParams> = (props: PropsWithChildren<MapPar
     }
 
     return (
+        // eslint-disable-next-line no-mixed-operators
+        isLoading && <LoadingBar /> ||
         <svg width={800} height={450} viewBox={`0 0 ${width} ${height}`} className="m-auto">
             <g className="countries">
                 {
