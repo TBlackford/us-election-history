@@ -60,3 +60,4 @@ admin.env
 _meta
 .serverless
 __pycache__
+/.vscode
