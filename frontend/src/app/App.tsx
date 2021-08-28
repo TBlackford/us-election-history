@@ -1,16 +1,9 @@
-import React from 'react';
-import { Route, RouteComponentProps, RouteProps, Switch, withRouter } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 import HomePage from "../pages/HomePage";
-import YearViewPage from "../pages/YearViewPage";
 
 import './App.css';
-
-interface RenderProps extends RouteProps {
-}
-
-interface HistoryProps extends RouteComponentProps {
-}
 
 const NoMatch = () => (
     <div>
@@ -18,14 +11,13 @@ const NoMatch = () => (
     </div>
 )
 
-class App extends React.Component<RenderProps & HistoryProps> {
+class App extends Component {
     render() {
         return (
             <div className="main-content">
                 <div>
                     <Switch>
                         <Route exact path="/" component={HomePage}/>
-                        <Route exact path="/:year/" component={YearViewPage}/>
                         <Route path="*">
                             <NoMatch/>
                         </Route>
@@ -36,4 +28,4 @@ class App extends React.Component<RenderProps & HistoryProps> {
     }
 }
 
-export default withRouter(App);
+export default App;

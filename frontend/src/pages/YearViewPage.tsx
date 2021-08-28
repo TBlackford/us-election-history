@@ -7,12 +7,11 @@ let YearViewPage: (props: RouteComponentProps) => JSX.Element = (props) => {
     // @ts-ignore
     let year: string = props.match.params['year'].toString() || '';
     return (
-        <div>
+        <>
             <ResultsHeader/>
-            <Map year={year}/>
-        </div>
+            <Map year={year}  />
+        </>
     );
 }
 
 export default withRouter(YearViewPage);
-

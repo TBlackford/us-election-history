@@ -1,8 +1,6 @@
 const path = require(`path`);
 
-const SRC = `./src`;
-
-const alias = (prefix = `src`) => ({
+const alias = (prefix) => ({
     '@app': `${prefix}/app`,
     '@common': `${prefix}/common`,
     '@components': `${prefix}/components`,
@@ -10,7 +8,7 @@ const alias = (prefix = `src`) => ({
     '@slices': `${prefix}/slices`,
     '@utils': `${prefix}/utils`,
 });
-const aliases = alias(SRC);
+const aliases = alias(`./src`);
 
 const resolvedAliases = Object.fromEntries(
     Object.entries(aliases).map(([key, value]) => [key, path.resolve(__dirname, value)]),

@@ -1,13 +1,10 @@
-import React, { PropsWithChildren, useEffect, useState } from 'react';
+import React, { CSSProperties, PropsWithChildren, useEffect, useState } from 'react';
 import { geoAlbersUsa, geoPath, GeoPermissibleObjects } from 'd3-geo';
 
 import cartographer from "@common/cartographer.api";
 import LoadingBar from "@components/LoadingBar";
 
-const width = 800;
-const height = 450;
-
-const projection = geoAlbersUsa()
+const projection = (width: number, height: number) => geoAlbersUsa()
     .scale(950)
     .translate([width / 2, height / 2]);
 
@@ -17,9 +14,13 @@ interface IGeoJsonObject {
 }
 
 interface MapParams {
-    year: string;
+    year?: string
+    width?: number;
+    height?: number;
 }
 
+class SvgCSS implements CSSProperties, MapParams {
+}
 
 const Map: React.FunctionComponent<MapParams> = (props: PropsWithChildren<MapParams>) => {
     // Map data to be displayed
@@ -31,7 +32,7 @@ const Map: React.FunctionComponent<MapParams> = (props: PropsWithChildren<MapPar
 
     // Get the data from the git repo (cheeky way to do an api I don't have to pay for or maintain)
     useEffect(() => {
-        cartographer('GET', props.year.toString(), {})
+        cartographer('GET', props?.year?.toString(), {})
             .then(res => {
                 console.log("before set");
                 setGeojson(res.data.map);
@@ -56,17 +57,21 @@ const Map: React.FunctionComponent<MapParams> = (props: PropsWithChildren<MapPar
         // TODO: make this
     }
 
+    const width = props.width ?? 0;
+    const height = props.height ?? 0;
+
     return (
         // eslint-disable-next-line no-mixed-operators
         isLoading && <LoadingBar /> ||
-        <svg width={800} height={450} viewBox={`0 0 ${width} ${height}`} className="m-auto">
-            <g className="countries">
+        <svg style={{width: '100%', height: '100%', overflow: 'visible'} as SvgCSS}
+             viewBox={`0 0 800 450`} className="m-auto">
+            <g className="countries" transform={`translate(${width / 2}, ${height / 2})`}>
                 {
                     geojson.features.map((d: GeoPermissibleObjects, i: any) => (
                         <path
                             key={`path-${i}`}
                             // @ts-ignore
-                            d={geoPath().projection(projection)(d)}
+                            d={geoPath().projection(projection(props.width, props.height))(d)}
                             className="country"
                             stroke="#FFFFFF"
                             strokeWidth={0.5}
@@ -78,6 +83,12 @@ const Map: React.FunctionComponent<MapParams> = (props: PropsWithChildren<MapPar
             </g>
         </svg>
     )//*/
+}
+
+Map.defaultProps = {
+    year: '1788',
+    width: 800,
+    height: 450
 }
 
 export default Map;

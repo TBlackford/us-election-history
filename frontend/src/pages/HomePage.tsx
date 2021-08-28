@@ -1,4 +1,5 @@
 import React from 'react';
+import Map from "@components/Map";
 
 const years = Array(59).fill({
     year: 1788,
@@ -23,7 +24,8 @@ const HomePage: React.FunctionComponent = () => {
                     <dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10">
                         {years.map((year, index) => (
                             <div key={year.year + (index * 4)} className="relative">
-                                <img alt={`View of the US results for the year ${year.year}`} src={year.image}/>
+                                {/*<img alt={`View of the US results for the year ${year.year}`} src={year.image}/>*/}
+                                <Map year={year.year + (index * 4)} width={400} height={225} />
                                 <dt>
                                     <p className="ml-16 text-lg leading-6 font-medium text-gray-900">{year.year + (index * 4)}</p>
                                 </dt>
