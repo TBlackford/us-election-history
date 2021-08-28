@@ -17,6 +17,40 @@ functions:
       - http:
           path: /
           method: get
+  maps:
+    handler: handler.get_all_maps
+    events:
+      - http:
+          path: map/
+          method: get
+          cors:
+            origin: '*' # <-- Specify allowed origin
+            headers: # <-- Specify allowed headers
+              - Content-Type
+              - X-Amz-Date
+              - Accept
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
+  years:
+    handler: handler.get_all_years
+    events:
+      - http:
+          path: map/years
+          method: get
+          cors:
+            origin: '*' # <-- Specify allowed origin
+            headers: # <-- Specify allowed headers
+              - Content-Type
+              - X-Amz-Date
+              - Accept
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
   map:
     handler: handler.get_map
     events:

@@ -91,21 +91,10 @@ def hello(event, context):
 
     return response
 
-    # Use this code if you don't use the http event with the LAMBDA-PROXY
-    # integration
-    """
-    return {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
-        "event": event
-    }
-    """
-
 def get_map(event, context):
     map_path = event['pathParameters']['year']
     if map_path is not None:
         if map_path in map_list:
-            print(map_path)
-            print(map_list[map_path])
             return make_response(200, {
                 "map": from_bucket(map_list[map_path])
             })
@@ -117,6 +106,22 @@ def get_map(event, context):
         return make_response(500, {
                 "msg": "Enter a year"
             })
+
+def get_all_maps(event, context):
+    # This won't work -> too much data to get and it times out
+    maps = {}
+
+    for year, map_path in map_list.items():
+        maps[year] = from_bucket(map_path)
+
+    return make_response(200, {
+        "maps": maps
+    })
+
+def get_all_years(event, context):
+    return make_response(200, {
+        "years": [years for years in map_list.keys()]
+    })
 
 def buckets(event, context):
     bucket = s3.get_object(Bucket='us-history-maps', Key='GeoJSON/1789030.geojson')
