@@ -1,29 +1,33 @@
-import React, { FunctionComponent } from 'react';
-import { useParams, withRouter } from "react-router-dom";
+import React, { FunctionComponent, useEffect, useState } from 'react';
+import { Redirect, useParams, withRouter } from "react-router-dom";
 import Map from '@components/Map';
 import ResultsHeader from '@components/ResultsHeader';
 
-const years: Array<string | undefined> =
-    Array.from(new Array(59),(val, index) => ((index * 4) + 1788).toString() );
+import { useAppSelector } from "@app/hooks";
 
 interface SlugParams {
     year?: string | undefined
 }
 
 const YearViewPage: FunctionComponent = () => {
+    const [redirect, setRedirect] = useState(false);
     const { year } = useParams<SlugParams>();
+    const years = useAppSelector((state) => state.years.list)
 
-    Notification.requestPermission()
-        .then(() => new Notification('Hey 👋'));
+    useEffect(() => {
+        console.log(year);
+        console.log(years);
+        if(!years.includes(year) && years.length !== 0) {
+            setRedirect(true);
+        }
+    }, [year, years])
 
-    if(!years.includes(year)) {
-        return null;
-    }
-
-    return (
+    return redirect && <Redirect to={'404'} /> || (
         <>
             <ResultsHeader/>
-            <Map year={year} width={800} height={450} />
+            <div style={{width: "800px", height: "450px"}}>
+                <Map year={year} width={800} height={450} />
+            </div>
         </>
     );
 }

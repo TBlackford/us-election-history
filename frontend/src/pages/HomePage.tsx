@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import Map from "@components/Map";
 
 const years = Array(59).fill({
@@ -27,7 +28,7 @@ const HomePage: React.FunctionComponent = () => {
                                 {/*<img alt={`View of the US results for the year ${year.year}`} src={year.image}/>*/}
                                 <Map year={year.year + (index * 4)} width={400} height={225} />
                                 <dt>
-                                    <p className="ml-16 text-lg leading-6 font-medium text-gray-900">{year.year + (index * 4)}</p>
+                                    <Link to={`/${year.year + (index * 4)}`} className="ml-16 text-lg leading-6 font-medium text-gray-900">{year.year + (index * 4)}</Link>
                                 </dt>
                             </div>
                         ))}

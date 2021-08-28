@@ -34,10 +34,8 @@ const Map: React.FunctionComponent<MapParams> = (props: PropsWithChildren<MapPar
     useEffect(() => {
         cartographer('GET', props?.year?.toString(), {})
             .then(res => {
-                console.log("before set");
                 setGeojson(res.data.map);
                 setIsLoading(false);
-                console.log("after set");
             })
             .catch(error => {
                 if(error.response) {
